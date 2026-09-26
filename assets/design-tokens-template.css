@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Design Tokens — Template (Phase 2)
+   Replace every value from the Phase 1 direction plan. Components consume
+   ONLY these tokens — raw hex, magic spacing, or ad-hoc z-index in a
+   component is a pre-flight failure. OKLCH preferred for color so light/dark
+   variants keep consistent perceived lightness; hex fallbacks fine.
+   Tailwind projects: mirror these in @theme / tailwind.config instead.
+   ========================================================================== */
+
+:root {
+  /* ---- Color · roles (light) — set from the locked palette ------------- */
+  --color-background:        oklch(0.985 0.003 260);  /* page field (never pure #fff) */
+  --color-surface:           oklch(0.965 0.004 260);  /* cards, wells */
+  --color-surface-elevated:  oklch(1 0 0 / 0.72);     /* raised layers, popovers */
+  --color-border:            oklch(0.90 0.006 260);
+  --color-border-strong:     oklch(0.80 0.008 260);
+  --color-text-primary:      oklch(0.22 0.01 260);    /* never pure #000 */
+  --color-text-secondary:    oklch(0.42 0.012 260);
+  --color-text-muted:        oklch(0.55 0.01 260);    /* must still pass 4.5:1 use-cases */
+  --color-accent:            oklch(0.55 0.18 260);    /* ONE accent — locked page-wide */
+  --color-accent-hover:      oklch(0.50 0.18 260);    /* lightness step, not opacity */
+  --color-accent-contrast:   oklch(0.985 0.003 260);  /* text ON accent — verify 4.5:1 */
+  --color-destructive:       oklch(0.55 0.19 25);
+  --color-success:           oklch(0.55 0.15 150);
+  --color-warning:           oklch(0.70 0.15 80);
+  --color-focus-ring:        var(--color-accent);     /* ≥3:1 vs adjacent colors */
+
+  /* ---- Space · 4px base scale ------------------------------------------ */
+  --space-1: 0.25rem;  --space-2: 0.5rem;   --space-3: 0.75rem;
+  --space-4: 1rem;     --space-6: 1.5rem;   --space-8: 2rem;
+  --space-12: 3rem;    --space-16: 4rem;    --space-24: 6rem;   /* hero pt cap */
+
+  /* ---- Type · fluid scale (ratio ≈ 1.25 here; tune per direction) ------ */
+  --font-display: "REPLACE-Display", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "REPLACE-Body", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "REPLACE-Mono", ui-monospace, "SFMono-Regular", monospace;
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;                                   /* body floor: 16px */
+  --text-lg:   clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --text-xl:   clamp(1.25rem, 1.1rem + 0.9vw, 1.563rem);
+  --text-2xl:  clamp(1.563rem, 1.3rem + 1.4vw, 1.953rem);
+  --text-3xl:  clamp(1.953rem, 1.5rem + 2.2vw, 2.441rem);
+  --text-4xl:  clamp(2.441rem, 1.8rem + 3.2vw, 3.5rem);   /* hero default band */
+  --leading-tight: 1.15;    /* headings; ≥1.1 if italic descenders present */
+  --leading-body:  1.6;
+  --tracking-display: -0.02em;
+  --tracking-label:    0.06em;   /* small caps / labels only */
+  --measure: 65ch;
+
+  /* ---- Radius · ONE system, locked ------------------------------------- */
+  --radius-interactive: 0.75rem;   /* buttons, inputs */
+  --radius-container:   1rem;      /* cards, dialogs  */
+  --radius-full:        9999px;    /* pills — only if the system is pill */
+
+  /* ---- Elevation · tinted toward background hue, never pure black ------ */
+  --shadow-sm: 0 1px 2px oklch(0.25 0.02 260 / 0.06);
+  --shadow-md: 0 2px 6px oklch(0.25 0.02 260 / 0.07),
+               0 8px 24px oklch(0.25 0.02 260 / 0.06);
+
+  /* ---- Motion · from references/motion.md ------------------------------ */
+  --duration-fast:   150ms;   /* press, small popovers        */
+  --duration-base:   200ms;   /* hover color, dropdowns       */
+  --duration-slow:   300ms;   /* modals, drawers, slides      */
+  --ease-enter:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-move:   cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ---- Z-index · the documented scale — nothing outside it ------------- */
+  --z-sticky:  100;   /* sticky nav            */
+  --z-overlay: 200;   /* scrims                */
+  --z-modal:   300;   /* dialogs, drawers      */
+  --z-toast:   400;
+  --z-top:     500;   /* grain/pointer-none fx */
+
+  color-scheme: light dark;
+}
+
+/* ---- Dark theme: token swap with hierarchy parity + brand fidelity.
+       Elevation = lighter surface, not heavier shadow. --------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-background:       oklch(0.17 0.008 260);   /* off-black, never #000 */
+    --color-surface:          oklch(0.21 0.009 260);
+    --color-surface-elevated: oklch(0.25 0.01 260);
+    --color-border:           oklch(0.30 0.01 260);
+    --color-border-strong:    oklch(0.40 0.012 260);
+    --color-text-primary:     oklch(0.93 0.005 260);
+    --color-text-secondary:   oklch(0.75 0.008 260);
+    --color-text-muted:       oklch(0.62 0.008 260);
+    --color-accent:           oklch(0.68 0.16 260);    /* lifted + slightly desaturated */
+    --color-accent-hover:     oklch(0.73 0.16 260);
+    --color-accent-contrast:  oklch(0.17 0.008 260);
+    --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.4);
+    --shadow-md: 0 2px 8px oklch(0 0 0 / 0.45);
+  }
+}
+[data-theme="dark"] { /* mirror the dark block here for manual toggles */ }
+
+/* ---- Baseline behaviors the tokens assume ------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;   /* styled, never removed */
+}
+
+[data-theme-switching] * { transition: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

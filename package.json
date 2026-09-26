@@ -1,0 +1,59 @@
+{
+  "name": "@etemigarba/frontend-ui-ux-designer-skill",
+  "version": "1.0.0",
+  "description": "Award-caliber frontend UI/UX design workflow for Claude Code: 5-phase loop (Perceive→Direction→System→Build→Motion→Reflect), 4 surface modes, semantic tokens, WCAG 2.2 AA, Core Web Vitals, anti-default discipline. Zero dependencies. MIT licensed.",
+  "keywords": [
+    "claude-code",
+    "opencode",
+    "ai-agent",
+    "design-system",
+    "ui-ux",
+    "frontend",
+    "accessibility",
+    "wcag",
+    "design-tokens",
+    "motion-design",
+    "agentic-engineering"
+  ],
+  "homepage": "https://github.com/etemigarba/frontend-ui-ux-designer-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etemigarba/frontend-ui-ux-designer-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/etemigarba/frontend-ui-ux-designer-skill/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Prof. Etemi Joshua Garba",
+    "email": "security@ethereal.ng",
+    "url": "https://ethereal.ng/"
+  },
+  "files": [
+    "SKILL.md",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "assets/",
+    "references/",
+    "docs/",
+    "scripts/",
+    "wiki/"
+  ],
+  "scripts": {
+    "validate": "python scripts/validate-skill.py",
+    "lint": "markdownlint \"**/*.md\" --ignore node_modules --ignore .git --config .markdownlint.json",
+    "test": "npm run validate && npm run lint"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "markdownlint-cli": "^0.41.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}
